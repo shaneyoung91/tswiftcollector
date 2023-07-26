@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Details</h2>
+
+<div class="card">
+    <div class="card-content">
+        <span class="card-title">{{ tswift.name }}</span>
+        <p>Release Year: {{ tswift.year }}</p>
+        <p>Popular Songs: {{ tswift.songs }}</p>
+        {% if tswift.taylors_version %}
+            <p>Taylor's Version? - Yes</p>
+        {% else %}
+            <p>Taylor's Version? - No</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

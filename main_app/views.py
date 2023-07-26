@@ -13,6 +13,9 @@ def tswifts_index(request):
     tswifts = TSwift.objects.all()
     return render(request, 'tswifts/index.html', {'tswifts': tswifts})
 
+def tswifts_detail(request, tswift_id):
+    tswift = TSwift.objects.get(id=tswift_id)
+    return render(request, 'tswifts/detail.html', {'tswift':tswift})
 
 # taylors = [
 #     {'name': 'Debut Taylor', 'year': 2006, 'songs': ['Teardrops on My Guitar', 'Tim McGraw', 'Our Song']},
