@@ -14,6 +14,10 @@
             <p>Taylor's Version? - No</p>
         {% endif %}
     </div>
+    <div class="card-action">
+        <a href="{% url 'tswifts_update' tswift.id %}">Edit</a>
+        <a href="{% url 'tswifts_delete' tswift.id %}">Delete</a>
+    </div>
 </div>
 
 {% endblock %}

@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class TSwift(models.Model):
@@ -9,3 +10,6 @@ class TSwift(models.Model):
     
     def __str__(self):
         return f'({self.id}) {self.name}'
+    
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'tswift_id': self.id})

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import TSwift
 
 # Create your views here.
@@ -16,6 +16,19 @@ def tswifts_index(request):
 def tswifts_detail(request, tswift_id):
     tswift = TSwift.objects.get(id=tswift_id)
     return render(request, 'tswifts/detail.html', {'tswift':tswift})
+
+class TSwiftCreate(CreateView):
+    model = TSwift
+    fields = '__all__'
+
+class TSwiftUpdate(UpdateView):
+    model = TSwift
+    fields = ['songs', 'taylors_version']
+
+class TSwiftDelete(DeleteView):
+    model = TSwift
+    success_url = '/tswifts'
+
 
 # taylors = [
 #     {'name': 'Debut Taylor', 'year': 2006, 'songs': ['Teardrops on My Guitar', 'Tim McGraw', 'Our Song']},
