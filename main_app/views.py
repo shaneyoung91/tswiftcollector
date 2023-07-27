@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import TSwift
+from .forms import DatingHistoryForm
 
 # Create your views here.
 def home(request):
@@ -15,7 +16,16 @@ def tswifts_index(request):
 
 def tswifts_detail(request, tswift_id):
     tswift = TSwift.objects.get(id=tswift_id)
-    return render(request, 'tswifts/detail.html', {'tswift':tswift})
+    datinghistory_form = DatingHistoryForm()
+    return render(request, 'tswifts/detail.html', {'tswift':tswift, 'datinghistory_form': datinghistory_form})
+
+def add_datinghistory(request, tswift_id):
+    form = DatingHistoryForm(request.POST)
+    if form.is_valid():
+        new_datinghistory = form.save(commit=False)
+        new_datinghistory.tswift_id = tswift_id
+        new_datinghistory.save()
+    return redirect('detail', tswift_id=tswift_id)
 
 class TSwiftCreate(CreateView):
     model = TSwift

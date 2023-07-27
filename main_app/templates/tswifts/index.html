@@ -10,6 +10,11 @@
                 <span class="card-title">{{ tswift.name }}</span>
                 <p>Release Year: {{ tswift.year }}</p>
                 <p>Popular Songs: {{ tswift.songs }}</p>
+                {% if tswift.taylors_version %}
+                    <p>Taylor's Version: Yes</p>
+                {% else %}
+                    <p>Taylor's Version: No</p>
+                {% endif %}
             </div>
         </a>
     </div>

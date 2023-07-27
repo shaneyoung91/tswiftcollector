@@ -9,4 +9,5 @@ urlpatterns = [
     path('tswifts/create/', views.TSwiftCreate.as_view(), name='tswifts_create'),
     path('tswifts/<int:pk>/update/', views.TSwiftUpdate.as_view(), name='tswifts_update'),
     path('tswifts/<int:pk>/delete/', views.TSwiftDelete.as_view(), name='tswifts_delete'),
+    path('tswifts/<int:tswift_id>/add_datinghistory/', views.add_datinghistory, name='add_datinghistory'),
 ]
