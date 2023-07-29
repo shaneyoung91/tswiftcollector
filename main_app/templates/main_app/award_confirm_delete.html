@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Delete Taylor</h2>
+<h2>Delete Award</h2>
 
-<h4>Are you sure you want to delete <span class="teal-text">{{ tswift.name }}</span>?</h4>
+<h4>Are you sure you want to delete <span class="teal-text">{{ award.name }}</span>?</h4>
 
 <form action="" method="POST">
     {% csrf_token %}
     <input type="submit" value="Regretablly....Yes!" class="btn">
-    <a href="{% url 'detail' tswift.id %}">Cancel</a>
+    <a href="{% url 'awards_detail' award.id %}">Cancel</a>
 </form>
 {% endblock %}
