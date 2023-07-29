@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import TSwift
+from django.views.generic import ListView, DetailView
+from .models import TSwift, Award
 from .forms import DatingHistoryForm
 
 # Create your views here.
@@ -39,14 +40,20 @@ class TSwiftDelete(DeleteView):
     model = TSwift
     success_url = '/tswifts'
 
+class AwardList(ListView):
+    model = Award
 
-# taylors = [
-#     {'name': 'Debut Taylor', 'year': 2006, 'songs': ['Teardrops on My Guitar', 'Tim McGraw', 'Our Song']},
-#     {'name': 'Fearless Taylor', 'year': 2008, 'songs': ['Love Story', 'You Belong With Me']},
-#     {'name': 'Speak Now Taylor', 'year': 2010, 'songs': ['Mean', 'Dear John', 'Enchanted', 'Back to December']},
-#     {'name': 'Red Taylor', 'year': 2012, 'songs': ['All Too Well', '22', 'I Knew You Were Trouble']},
-#     {'name': '1989 Taylor', 'year': 2014, 'songs': ['Blank Space', 'Bad Blood', 'Style', 'Wildest Dreams']},
-#     {'name': 'Reputation Taylor', 'year': 2017, 'songs': ['Delicate', 'Getaway Car', 'Gorgeous', '...Ready For It']},
-#     {'name': 'Lover Taylor', 'year': 2019, 'songs': ['Cruel Summer', 'Lover', 'Miss Americana & the Heartbreak Prince', 'London Boy']},
-#     {'name': 'Midnights Taylor', 'year': 2022, 'songs': ['Karma', 'Anti-Hero', 'Paris', 'Maroon']},
-# ]
+class AwardDetail(DetailView):
+    model = Award
+
+class AwardCreate(CreateView):
+    model = Award
+    fields = '__all__'
+    
+class AwardUpdate(UpdateView):
+    model = Award
+    fields = ['category', 'result']
+
+class AwardDelete(DeleteView):
+    model = Award
+    success_url = '/awards'
