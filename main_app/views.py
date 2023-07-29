@@ -30,7 +30,7 @@ def add_datinghistory(request, tswift_id):
 
 class TSwiftCreate(CreateView):
     model = TSwift
-    fields = '__all__'
+    fields = ['name', 'year', 'songs', 'taylors_version']
 
 class TSwiftUpdate(UpdateView):
     model = TSwift
