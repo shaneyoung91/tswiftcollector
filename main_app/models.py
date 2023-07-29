@@ -7,7 +7,11 @@ class Award(models.Model):
     result = models.CharField(max_length=50)
     
     def __str__(self):
-        return f'{self.tswift.name} - {self.category} - {self.result}'
+        return f'{self.category} - {self.result}'
+    
+    def get_absolute_url(self):
+        return reverse('awards_detail', kwargs={'pk': self.id})
+    
 
 class TSwift(models.Model):
     name = models.CharField(max_length=100)

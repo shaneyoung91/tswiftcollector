@@ -17,8 +17,11 @@ def tswifts_index(request):
 
 def tswifts_detail(request, tswift_id):
     tswift = TSwift.objects.get(id=tswift_id)
+    id_list = tswift.awards.all().values_list('id')
+    awards_tswift_doesnt_have = Award.objects.exclude(id__in=id_list)
     datinghistory_form = DatingHistoryForm()
-    return render(request, 'tswifts/detail.html', {'tswift':tswift, 'datinghistory_form': datinghistory_form})
+    return render(request, 'tswifts/detail.html', {'tswift':tswift, 
+        'datinghistory_form': datinghistory_form, 'awards': awards_tswift_doesnt_have})
 
 def add_datinghistory(request, tswift_id):
     form = DatingHistoryForm(request.POST)
@@ -57,3 +60,11 @@ class AwardUpdate(UpdateView):
 class AwardDelete(DeleteView):
     model = Award
     success_url = '/awards'
+    
+def assoc_award(request, tswift_id, award_id):
+    TSwift.objects.get(id=tswift_id).awards.add(award_id)
+    return redirect('detail', tswift_id=tswift_id)
+
+def unassoc_award(request, tswift_id, award_id):
+    TSwift.objects.get(id=tswift_id).awards.remove(award_id)
+    return redirect('detail', tswift_id=tswift_id)

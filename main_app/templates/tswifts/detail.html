@@ -45,6 +45,57 @@
     </div>
 </div>
 
+<!-- This is all new markup to be added just above the <script> tag -->
+<hr>
+<div class="row">
+    <div class="col s6">
+        <h3>{{ tswift.name }}'s Awards</h3>
+        {% if tswift.awards.count %}
+        {% for award in tswift.awards.all %}
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">
+                        {{award.category}} <span style="color: green">{{ award.result }}</span>
+                    </span>
+                </div>
+                <div class="card-action">
+                    <form action="{% url 'unassoc_award' tswift.id award.id %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">Remove Award</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+        {% else %}
+            <h4>None 😭</h4>
+        {% endif %}
+    </div>
+<!-- Available Awards will come after this line -->
+<div class="col s6">
+    <h3>Available Awards</h3>
+    {% if awards.count %}
+        {% for award in awards.all %}
+            <div class="card">
+            <div class="card-content">
+                <span class="card-title">
+                {{ award.category }} <span style="color: green">{{ award.result }}</span>
+                </span>
+            </div>
+            <div class="card-action">
+                <form action="{% url 'assoc_award' tswift.id award.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn">Add Award</button>
+                </form>
+            </div>
+            </div>
+        {% endfor %}
+        {% else %}
+        <h5>{{tswift.name}} Already Has All Awards Available</h5>
+        {% endif %}
+    </div>
+</div>
+
+
 <script>
     const startDateEl = document.getElementById('id_start_date')
     M.Datepicker.init(startDateEl, {

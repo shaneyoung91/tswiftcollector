@@ -11,8 +11,8 @@
                 <p>Result: {{ award.result }}</p>
             </div>
             <div class="card-action">
-                <a href="{% url 'awards_update' awards.id %}">Edit</a>
-                <a href="{% url 'awards_delete' awards.id %}">Delete</a>
+                <a href="{% url 'awards_update' award.id %}">Edit</a>
+                <a href="{% url 'awards_delete' award.id %}">Delete</a>
             </div>
         </div>
     </div>
